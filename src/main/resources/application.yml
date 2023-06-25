@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: husu-code-craftsman
+server:
+  port: 8080
+springdoc:
+  packagesToScan: com.husu
+  swagger-ui:
+    path: /swagger/index.html
+    enabled: true
+  api-docs:
+    path: /swagger/api-docs
+    enabled: true
