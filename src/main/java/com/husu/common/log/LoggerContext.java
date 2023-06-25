@@ -13,7 +13,6 @@ public final class LoggerContext {
     private LoggerContext() {
     }
 
-
     public static void setHttpStatusCode(String httpStatusCode) {
         MDC.put(TechniquePropertyEnum.HTTP_STATUS_CODE.getLogFieldName(), httpStatusCode);
     }
@@ -29,7 +28,6 @@ public final class LoggerContext {
     public static void setBusinessCode(String businessCode) {
         MDC.put(BusinessPropertyEnum.BUSINESS_CODE.getLogFieldName(), businessCode);
     }
-
 
     public static void clear() {
         MDC.clear();
