@@ -80,7 +80,7 @@ public class GenericResponseEntity<T> implements Serializable {
      *
      * @param s   要执行的操作
      * @param <T> 要包装的数据类型
-     * @author Chandler.C.Ren
+     * @author Ricardo.Y.Hu
      */
     public static <T> GenericResponseEntity<T> success(Supplier<T> s) {
         GenericResponseEntity<T> response = new GenericResponseEntity<>();
