@@ -23,14 +23,13 @@ public class JacksonConfig {
 
     /**
      * 所有的字符串类型，全部Trim
-     *
-     * @return
      */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder
                 .deserializerByType(String.class, new StdScalarDeserializer<String>(String.class) {
                     private static final long serialVersionUID = 1L;
+
                     @Override
                     public String deserialize(JsonParser jsonParser, DeserializationContext ctx)
                             throws IOException {

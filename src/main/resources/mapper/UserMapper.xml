@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.husu.home.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.husu.home.model.po.User">
+        <result column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="last_update_time" property="lastUpdateTime" />
+        <result column="last_update_by" property="lastUpdateBy" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 表字段 -->
+    <sql id="baseColumns">
+        t.id
+        , t.user_name
+        , t.password
+        , t.create_time
+        , t.update_time
+        , t.create_by
+        , t.last_update_time
+        , t.last_update_by
+        , t.deleted
+    </sql>
+
+    <!-- 查询全部 -->
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseColumns" />
+        FROM user t
+    </select>
+
+    <!-- 根据主键获取单条记录 -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+        SELECT
+        <include refid="baseColumns" />
+        FROM user t
+        WHERE id = #{id}
+    </select>
+
+    <!-- 插入全部字段 -->
+    <insert id="insert" parameterType="com.husu.home.model.po.User"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+        INSERT INTO user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_name,
+            password,
+            create_time,
+            update_time,
+            create_by,
+            last_update_time,
+            last_update_by,
+            deleted,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            #{userName},
+            #{password},
+            #{createTime},
+            #{updateTime},
+            #{createBy},
+            #{lastUpdateTime},
+            #{lastUpdateBy},
+            #{deleted},
+        </trim>
+    </insert>
+
+    <!-- 插入不为NULL的字段 -->
+    <insert id="insertIgnoreNull" parameterType="com.husu.home.model.po.User"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+        INSERT INTO user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+            <if test="lastUpdateBy != null">
+                last_update_by,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="userName != null" >
+                #{userName},
+            </if>
+            <if test="password != null" >
+                #{password},
+            </if>
+            <if test="createTime != null" >
+                #{createTime},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime},
+            </if>
+            <if test="createBy != null" >
+                #{createBy},
+            </if>
+            <if test="lastUpdateTime != null" >
+                #{lastUpdateTime},
+            </if>
+            <if test="lastUpdateBy != null" >
+                #{lastUpdateBy},
+            </if>
+            <if test="deleted != null" >
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 更新,更新全部字段 -->
+    <update id="update" parameterType="com.husu.home.model.po.User">
+        UPDATE user
+        <set>
+            user_name=#{userName},
+            password=#{password},
+            create_time=#{createTime},
+            update_time=#{updateTime},
+            create_by=#{createBy},
+            last_update_time=#{lastUpdateTime},
+            last_update_by=#{lastUpdateBy},
+            deleted=#{deleted},
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <!-- 更新不为NULL的字段 -->
+    <update id="updateIgnoreNull" parameterType="com.husu.home.model.po.User">
+        UPDATE user
+        <set>
+            <if test="userName != null" >
+                user_name=#{userName},
+            </if>
+            <if test="password != null" >
+                password=#{password},
+            </if>
+            <if test="createTime != null" >
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null" >
+                update_time=#{updateTime},
+            </if>
+            <if test="createBy != null" >
+                create_by=#{createBy},
+            </if>
+            <if test="lastUpdateTime != null" >
+                last_update_time=#{lastUpdateTime},
+            </if>
+            <if test="lastUpdateBy != null" >
+                last_update_by=#{lastUpdateBy},
+            </if>
+            <if test="deleted != null" >
+                deleted=#{deleted},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <!-- 根据主键删除记录 -->
+    <delete id="delete" parameterType="com.husu.home.model.po.User">
+        UPDATE user
+        SET is_deleted=1
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>
